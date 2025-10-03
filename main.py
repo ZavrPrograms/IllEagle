@@ -20,6 +20,9 @@ def loadmenu():
     global icon
 
     if page == 1:
+
+        os.system(r'title IllEagle [Page 1 - Piracy]')
+
         print(f'''{Fore.RED}(                                    
  )\ ) (  (                    (       
 (()/( )\ )\(     (    ) (  (  )\  (   
@@ -38,6 +41,9 @@ def loadmenu():
 ''')
     
     elif page == 2:
+
+        os.system(r'title IllEagle [Page 2 - Testicle]')
+
         print(f'''{Fore.RED}(                                    
  )\ ) (  (                    (       
 (()/( )\ )\(     (    ) (  (  )\  (   
