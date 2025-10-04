@@ -81,7 +81,7 @@ def spammer():
     global strings
     message = "# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n"
     link = userIn('ChannelID')
-    threads = 4
+    threads = 1
     strings = True
     while True:
         for i in range(threads):
