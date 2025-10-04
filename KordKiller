@@ -1,0 +1,109 @@
+print('Importing libraries')
+
+import requests
+import os
+from colorama import Fore
+import random
+import time
+import threading
+from dotenv import load_dotenv, dotenv_values
+import string
+
+print(f'{Fore.YELLOW}')
+
+print('Setting Variables (1/2)')
+
+status = 0
+strings = False
+
+print('Loading DOTENV')
+
+def read_tokens(file_path):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            tokens = [line.strip() for line in file if line.strip()]
+        return tokens
+    except FileNotFoundError:
+        print(f"Error: The file '{file_path}' does not exist.")
+        return []
+
+tokens = read_tokens('token.txt')
+
+print('Setting Up')
+
+os.system(f'title KordKiller')
+
+print('Creating Headers')
+
+def clear():
+    os.system('cls')
+
+def system(command):
+    os.system(command)
+
+def pause():
+    print(f'Press {Fore.RED}any{Fore.RESET} key to continue')
+    os.system('pause >nul')
+
+def genstr(length):
+    return ''.join(random.choice(string.ascii_uppercase) for i in range(length))
+
+userIn_Variable = ""
+
+def userIn(query):
+    global userIn_Variable
+
+    color = Fore.CYAN
+    colorr = Fore.RESET
+
+    def ctext(text):
+        output = f"{color}{text}{colorr}"
+        return output
+    x = input(f'{ctext("[")}KordKiller{ctext("]")} | {ctext("[")}{query}{ctext("]")} {ctext(">> ")}')
+
+    return x
+
+
+def send(token, link, message):
+    global status
+    payload = {
+        'content': message
+    }
+
+    header = {
+        'authorization': token
+    }
+    r = requests.post(f"https://discord.com/api/v9/channels/{link}/messages", data=payload, headers=header)
+    status = r.status_code
+
+def spammer():
+    global tokens
+    global strings
+    message = "# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n# JOE HENDRY ON TOP\n"
+    link = userIn('ChannelID')
+    threads = 4
+    strings = True
+    while True:
+        for i in range(threads):
+            for token in tokens:
+                print(f'sending {token} | {link} | {message}')
+                threading.Thread(target=send, args=(token, link, message), daemon=True).start()
+            time.sleep(0.1)
+
+            if status == 200:
+                print(f'{Fore.GREEN}Success!{Fore.WHITE}')
+            elif status == 429:
+                print(f'{Fore.YELLOW}Rate limit{Fore.WHITE}')
+                time.sleep(10)
+            else:
+                print(f'{Fore.RED}FAILED [{status}]{Fore.WHITE}')
+                time.sleep(1)
+
+print(f'Finished! {Fore.RESET}')
+
+clear()
+
+print(f'Welcome to {Fore.CYAN}KordKiller{Fore.RESET}')
+print(f"tokens: {tokens}")
+pause()
+spammer()
